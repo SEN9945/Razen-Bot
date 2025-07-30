@@ -7,6 +7,8 @@
 <p align="center">
     <a href="#"><img src="https://img.shields.io/badge/Python-3.11+-blue?style=for-the-badge&logo=python" alt="Python Version"></a>
     <a href="#"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License"></a>
+    <a href="https://www.youtube.com/@iceskey"><img src="https://img.shields.io/badge/YouTube-iceskey-red?style=for-the-badge&logo=youtube" alt="YouTube"></a>
+    <a href="#"><img src="https://img.shields.io/badge/Bahasa-Indonesia-lightgrey?style=for-the-badge&logo=googletranslate" alt="Language"></a>
 </p>
 
 <p align="center">
