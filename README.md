@@ -1,127 +1,160 @@
-# Razen Bot - Asisten Pribadi Cerdas untuk Google Workspace
+# Razen - Asisten Pribadi Cerdas Bertenaga AI
 
-**Razen Bot** adalah sebuah asisten pribadi yang sangat cerdas dan aman, dirancang untuk menjadi jembatan antara antarmuka percakapan Telegram yang nyaman dengan ekosistem Google Workspace Anda (Drive, Docs, Sheets). Dibangun dengan filosofi *keamanan di atas segalanya*, Razen memungkinkan Anda mengelola file, catatan, dan laporan keuangan hanya dengan menggunakan bahasa natural.
+![Python](https://img.shields.io/badge/Python-3.11+-blue?style=for-the-badge&logo=python)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
----
+<p align="center">
+  <img src="https://i.imgur.com/8Qz5Q7x.png" alt="Arsitektur Razen" width="600"/>
+</p>
 
-## 🌟 Fitur Unggulan
-
-*   **Otak AI Cerdas (Google Gemini):** Memahami perintah bahasa alami. Anda tidak perlu menghafal perintah-perintah kaku.
-*   **Manajemen Google Drive Lengkap:**
-    *   Upload file, foto, dan video dengan alur kerja otomatis atau manual.
-    *   Pencarian file dan folder interaktif.
-    *   Melihat daftar file berdasarkan tipe (dokumen, gambar, video, dll.) dengan sistem halaman (paginasi).
-*   **Sekretaris Pribadi (Google Docs):**
-    *   Membuat, menambah, dan membaca catatan langsung dari Telegram.
-*   **Akuntan Pribadi (Google Sheets):**
-    *   Mencatat laporan pengeluaran dengan mudah.
-    *   Membaca isi spreadsheet.
-    *   Menghitung total dari kolom tertentu secara otomatis.
-*   **Keamanan Terjamin:** Akses terbatas hanya untuk Admin dan otentikasi aman menggunakan OAuth 2.0.
+**Razen** adalah sebuah bot asisten pribadi Telegram yang cerdas, dirancang untuk menjadi jembatan antara percakapan sehari-hari Anda dengan ekosistem produktivitas Google Workspace. Ditenagai oleh **Google Gemini AI**, Razen mampu memahami perintah dalam bahasa natural dan mengeksekusi berbagai tugas, mulai dari manajemen file di Google Drive, membuat catatan di Google Docs, hingga mencatat pengeluaran di Google Sheets.
 
 ---
 
-## 🚀 Panduan Instalasi
+## ✨ Fitur Utama
 
-Ikuti langkah-langkah berikut untuk menjalankan Razen Bot di server Anda.
+Razen dilengkapi dengan serangkaian fitur canggih yang dirancang untuk meningkatkan produktivitas Anda:
 
-### 1. Prasyarat
+* 🧠 **Otak AI Cerdas:**
+    * Memahami perintah dalam bahasa natural berkat integrasi dengan **Google Gemini AI (`gemini-2.5-flash`)**.
+    * Tidak perlu menghafal perintah kaku, cukup ajak Razen bicara seperti biasa.
 
-*   Python 3.10 atau lebih tinggi.
-*   Akun Google.
-*   Akun Telegram dan bot yang dibuat melalui [BotFather](https://t.me/BotFather).
+* 🔒 **Keamanan Maksimal:**
+    * Akses bot sepenuhnya terbatas pada **User ID** yang telah diotorisasi, memastikan hanya Anda yang dapat mengendalikannya.
 
-### 2. Kloning Repositori
+* 🗂️ **Manajemen Google Drive:**
+    * **Upload Canggih:** Kirim file apa saja dan Razen akan menawarkan opsi penyimpanan otomatis (berdasarkan kategori) atau manual (ke folder baru atau yang sudah ada).
+    * **Pencarian Interaktif:** Cari file dan folder dengan bahasa natural. Hasil akan ditampilkan dalam bentuk tombol yang bisa dipilih.
+    * **Kirim File:** Minta file dari hasil pencarian dan Razen akan mengirimkannya langsung ke Anda.
 
-```bash
-git clone https://github.com/YOUR_USERNAME/MyRazenBot.git
-cd MyRazenBot
-```
+* ✍️ **Manajemen Google Docs:**
+    * **Buat Catatan:** Buat dokumen baru di folder "Catatan" dengan cepat.
+    * **Tambah Catatan:** Lanjutkan tulisan pada dokumen yang sudah ada tanpa perlu membuat file baru.
+    * **Baca Catatan:** Minta Razen untuk membacakan isi dari catatan yang tersimpan.
 
-### 3. Setup Virtual Environment
+* 📊 **Manajemen Google Sheets:**
+    * **Catat Pengeluaran:** Laporkan pengeluaran harian dengan mudah (`/lapor Makanan 50000`), dan Razen akan mencatatnya di spreadsheet "Laporan Keuangan" secara otomatis.
 
-Sangat disarankan untuk menggunakan virtual environment.
+---
 
-```bash
-# Buat virtual environment
-python -m venv .venv
+## 🚀 Panduan Memulai
 
-# Aktifkan (Windows)
-.venv\Scripts\activate
+Ikuti langkah-langkah di bawah ini untuk menjalankan Razen di server atau komputer lokal Anda.
 
-# Aktifkan (macOS/Linux)
-# source .venv/bin/activate
-```
+### Prasyarat
 
-### 4. Instalasi Dependensi
+* Python 3.10 atau versi lebih baru.
+* Akun Telegram.
+* Akun Google.
 
-Instal semua pustaka yang diperlukan dengan satu perintah:
+### Panduan Instalasi
 
-```bash
-pip install -r requirements.txt
-```
+1.  **Kloning Repositori**
+    ```bash
+    git clone [https://github.com/NAMA_USER_ANDA/NAMA_REPO_ANDA.git](https://github.com/NAMA_USER_ANDA/NAMA_REPO_ANDA.git)
+    cd NAMA_REPO_ANDA
+    ```
 
-### 5. Konfigurasi Google API
+2.  **(Sangat Direkomendasikan) Buat Virtual Environment**
+    Ini akan mengisolasi dependensi proyek Anda dan mencegah konflik.
+    ```bash
+    # Untuk Windows
+    python -m venv .venv
+    .\.venv\Scripts\activate
 
-1.  Buka [Google Cloud Console](https://console.cloud.google.com/).
-2.  Buat proyek baru.
-3.  Aktifkan API berikut untuk proyek Anda:
-    *   **Google Drive API**
-    *   **Google Docs API**
-    *   **Google Sheets API**
-4.  Buka menu "Credentials" (Kredensial).
-5.  Buat "OAuth client ID" baru.
-6.  Pilih "Desktop app" sebagai tipe aplikasi.
-7.  Setelah dibuat, unduh file JSON kredensial tersebut dan **ganti namanya menjadi `credentials.json`**, lalu letakkan di dalam folder proyek `MyRazenBot`.
+    # Untuk macOS/Linux
+    python3 -m venv .venv
+    source .venv/bin/activate
+    ```
 
-### 6. Konfigurasi Environment Bot
+3.  **Instalasi Dependensi**
+    Buat file bernama `requirements.txt` di dalam folder proyek Anda, salin konten di bawah ini ke dalamnya, lalu jalankan perintah `pip`.
 
-1.  Buat file baru bernama `.env` di dalam folder proyek.
-2.  Isi file tersebut dengan format berikut:
+    **`requirements.txt`:**
+    ```text
+    python-telegram-bot
+    python-dotenv
+    google-api-python-client
+    google-auth-httplib2
+    google-auth-oauthlib
+    gspread
+    google-generativeai
+    ```
 
-```
-TELEGRAM_TOKEN="TOKEN_BOT_TELEGRAM_ANDA"
-ADMIN_USER_ID="USER_ID_TELEGRAM_ANDA"
-GEMINI_API_KEY="API_KEY_GEMINI_ANDA"
-YOUR_GOOGLE_EMAIL="EMAIL_GOOGLE_ANDA_UNTUK_SHARE_SHEET"
-```
+    **Jalankan perintah instalasi:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-*   `TELEGRAM_TOKEN`: Dapatkan dari BotFather.
-*   `ADMIN_USER_ID`: Dapatkan dari bot seperti [@userinfobot](https://t.me/userinfobot).
-*   `GEMINI_API_KEY`: Dapatkan dari [Google AI Studio](https://aistudio.google.com/app/apikey).
-*   `YOUR_GOOGLE_EMAIL`: Opsional, digunakan untuk membagikan akses spreadsheet yang baru dibuat secara otomatis.
+4.  **Konfigurasi Kunci API & Kredensial**
+    Ini adalah langkah paling penting. Anda memerlukan 4 kunci rahasia.
 
-### 7. Otentikasi Google (Langkah Krusial)
+    * **`TELEGRAM_TOKEN`**: Dapatkan dari **@BotFather** di Telegram dengan membuat bot baru.
+    * **`ADMIN_USER_ID`**: Dapatkan User ID Telegram Anda dari **@userinfobot**.
+    * **`GEMINI_API_KEY`**: Dapatkan dari **Google AI Studio**.
+    * **`credentials.json`**:
+        1.  Buat proyek di **Google Cloud Console**.
+        2.  Aktifkan API: **Google Drive API**, **Google Docs API**, dan **Google Sheets API**.
+        3.  Konfigurasi "OAuth consent screen" (pilih "External" dan tambahkan email Anda sebagai "Test user").
+        4.  Buat kredensial baru dengan tipe "OAuth client ID" dan pilih "Desktop app".
+        5.  Unduh file JSON yang dihasilkan dan ganti namanya menjadi `credentials.json`. Letakkan di folder utama proyek.
 
-Jalankan skrip `authenticate_google.py` untuk menghasilkan `token.json` yang akan digunakan bot untuk mengakses akun Google Anda.
+    Buat file bernama `.env` di folder utama proyek dan isi dengan format berikut:
+    ```env
+    TELEGRAM_TOKEN="TOKEN_TELEGRAM_ANDA"
+    ADMIN_USER_ID="USER_ID_TELEGRAM_ANDA"
+    GEMINI_API_KEY="KUNCI_API_GEMINI_ANDA"
+    YOUR_GOOGLE_EMAIL="emailanda@gmail.com" # Opsional, untuk membagikan Sheet ke diri sendiri
+    ```
 
-```bash
-python authenticate_google.py
-```
+5.  **Otentikasi Google Pertama Kali**
+    Kita perlu menjalankan skrip satu kali untuk menghasilkan `token.json` yang akan digunakan bot. Pastikan file `credentials.json` sudah ada.
 
-*   Ikuti instruksi di terminal. Anda akan diminta untuk membuka sebuah URL di browser, login dengan akun Google Anda, dan memberikan izin.
-*   Salin kode otorisasi yang diberikan dan tempelkan kembali ke terminal.
-*   File `token.json` akan dibuat secara otomatis. **Langkah ini hanya perlu dilakukan sekali.**
+    Jalankan skrip berikut di terminal:
+    ```bash
+    python authenticate_google.py
+    ```
+    Sebuah tab browser akan terbuka. Ikuti proses login dan berikan semua izin yang diminta. Setelah selesai, file `token.json` akan muncul di folder proyek Anda.
 
-### 8. Jalankan Bot!
+### Cara Menjalankan Bot
 
-Sekarang Anda siap untuk menjalankan bot utama.
-
+Setelah semua instalasi dan konfigurasi selesai, jalankan bot dengan perintah sederhana:
 ```bash
 python razen_bot.py
 ```
-
-Buka Telegram dan kirim perintah `/start` untuk melihat daftar lengkap kemampuannya.
+Bot Anda sekarang sudah aktif! Buka Telegram dan mulailah berinteraksi dengannya.
 
 ---
 
-## 💡 Contoh Penggunaan AI
+## 🤖 Contoh Penggunaan
 
-*   `carikan saya file presentasi Q3`
-*   `tampilkan semua file pdf saya`
-*   `buat catatan rapat penting hari ini isinya adalah...`
-*   `tambahkan ke daftar belanja: beli telur dan roti`
-*   `apa isi catatan proyek alpha?`
-*   `catat pengeluaran transportasi 150000`
-*   `baca laporan keuangan bulan lalu`
-*   `berapa total pengeluaran untuk makanan bulan ini?`
+* **Perintah Spesifik:**
+    * `/start` - Menampilkan pesan bantuan.
+    * `/cari Laporan Keuangan` - Mencari file/folder.
+    * `/catat Rapat Penting | Hasil rapat adalah...` - Membuat catatan baru.
+    * `/tambahcatatan Rapat Penting | Tambahan: ...` - Menambah ke catatan.
+    * `/bacacatatan Rapat Penting` - Membaca isi catatan.
+    * `/lapor Makanan 50000` - Mencatat pengeluaran.
+
+* **Percakapan Natural (AI):**
+    * "Razen, tolong carikan aku presentasi proyek alfa"
+    * "catat ide baru dengan isi: coba integrasi Google Calendar"
+    * "tambahkan ke daftar belanja: beli buah-buahan"
+    * "apa isi dari catatan rapat kemarin?"
+    * "baru saja keluar uang 35000 untuk bensin"
+
+---
+
+## 🗺️ Peta Jalan (Roadmap)
+
+Razen masih terus berkembang. Berikut adalah beberapa fitur yang direncanakan untuk masa depan:
+
+* [ ] **Pengiriman Folder (Tahap D):** Mengimplementasikan logika kompresi (zip) dan pengiriman folder dari hasil pencarian.
+* [ ] **Integrasi Google Calendar:** Menambahkan kemampuan untuk membuat dan mengelola agenda.
+* [ ] **Interaksi yang Lebih Kontekstual:** Membuat AI mampu mengingat percakapan sebelumnya.
+
+---
+
+## 📜 Lisensi
+
+Proyek ini didistribusikan di bawah Lisensi MIT. Lihat `LICENSE` untuk informasi lebih lanjut.
