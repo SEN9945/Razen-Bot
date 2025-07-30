@@ -872,7 +872,7 @@ def main():
     application.add_handler(CallbackQueryHandler(search_button_handler, pattern=r'^search_select_'))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_natural_language))
 
-    logger.info("Bot sedang berjalan. Tekan Ctrl+C untuk berhenti.")
+    logger.info("Terimakasi sudah menggunakan Razen Bot. Bot sedang berjalan. Tekan Ctrl+C untuk berhenti.")
     application.run_polling()
 
 if __name__ == '__main__':
