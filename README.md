@@ -8,6 +8,8 @@
     <a href="#"><img src="https://img.shields.io/badge/Python-3.11+-blue?style=for-the-badge&logo=python" alt="Python Version"></a>
     <a href="#"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License"></a>
     <a href="https://www.youtube.com/@iceskey"><img src="https://img.shields.io/badge/YouTube-iceskey-red?style=for-the-badge&logo=youtube" alt="YouTube"></a>
+    <a href="https://git-scm.com/downloads/" target="_blank"><img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git"></a>
+    <a href="https://code.visualstudio.com/" target="_blank"><img src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="VS Code"></a>
     <a href="#"><img src="https://img.shields.io/badge/Bahasa-Indonesia-lightgrey?style=for-the-badge&logo=googletranslate" alt="Language"></a>
 </p>
 
@@ -29,17 +31,18 @@
 
 ---
 
-## 📁 Struktur Proyek
+### 📁 Struktur Proyek Akhir
 
-Agar bot dapat berjalan, repositori Anda harus memiliki struktur file berikut. Anda hanya perlu menyediakan file yang ditandai `(Buat Sendiri)`.
+Setelah semua langkah selesai, folder proyek Anda akan terlihat seperti ini:
 
 ```
-/MyRazenBot
+/MyRazenBot/Razen-Bot
 ├── .venv/                     # (Dibuat otomatis oleh Python)
 ├── razen_bot.py               # File utama bot yang Anda miliki
 ├── authenticate_google.py     # (Buat Sendiri) Skrip untuk otentikasi pertama kali
 ├── requirements.txt           # (Buat Sendiri) Daftar pustaka (library) yang dibutuhkan
 ├── .env                       # (Buat Sendiri) File untuk menyimpan semua kunci rahasia
+├── .gitignore                 # (Buat Sendiri) Mengamankan file rahasia dari Git
 ├── credentials.json           # (Unduh dari Google) Kunci akses ke Google Cloud
 └── token.json                 # (Dihasilkan otomatis) Token izin Google Anda
 ```
@@ -48,38 +51,54 @@ Agar bot dapat berjalan, repositori Anda harus memiliki struktur file berikut. A
 
 ## 🚀 Panduan Instalasi Lengkap
 
+Sebelum memulai, pastikan Anda sudah menginstal perangkat lunak berikut:
+1.  **[Git](https://git-scm.com/downloads/):** Sistem untuk mengelola versi kode.
+2.  **[Python](https://www.python.org/downloads/):** Bahasa pemrograman yang kita gunakan (versi 3.10+).
+3.  **[Visual Studio Code](https://code.visualstudio.com/):** Editor kode gratis. Kita akan menggunakannya untuk mengedit file.
+
 Ikuti langkah-langkah di bawah ini secara berurutan untuk menjalankan Razen dari awal.
+Panduan ini terbagi menjadi dua bagian utama:
+* **Bagian A: Persiapan di Komputer Lokal Anda (yang memiliki Browser)**
+* **Bagian B: Pemasangan di Server/VPS/Termux (hanya Terminal)**
 
-### Langkah 1: Persiapan Awal
+#### A1. Dapatkan Semua Kunci Rahasia
 
-1.  **Kloning Repositori Anda** di dalam folder bot milik anda
-     ```bash
-    cd NAMA_REPO_ANDA
-    ```
+1.  **`TELEGRAM_TOKEN`**: Dapatkan dari **[@BotFather](https://t.me/BotFather)** di Telegram.
+2.  **`ADMIN_USER_ID`**: Dapatkan dari **[@userinfobot](https://t.me/userinfobot)**.
+3.  **`GEMINI_API_KEY`**: Dapatkan dari **[Google AI Studio](https://aistudio.google.com/)**.
+4.  **`credentials.json`**:
+    * Buat proyek di **[Google Cloud Console](https://console.cloud.google.com/)**.
+    * Aktifkan API: **Google Drive API**, **Google Docs API**, dan **Google Sheets API**.
+    * Konfigurasi "OAuth consent screen" (pilih "External" dan tambahkan email Anda sebagai "Test user").
+    * Buat kredensial "OAuth client ID" dengan tipe "Desktop app".
+    * Unduh file JSON yang diberikan dan ganti namanya menjadi `credentials.json`.
+
+#### A2. Siapkan Folder Proyek Lokal
+
+1.  Buat folder proyek (misal: `MyRazenBot`) dan masukkan `razen_bot.py` serta `credentials.json` yang sudah di dapatkan di awal.
+2.  **Kloning Repositori ini di dalam folder proyek**
     ```bash
     git clone https://github.com/SEN9945/Razen-Bot.git
+    cd Razen-Bot
     ```
-
-3.  **Buat Virtual Environment**
-    > **Penting:** Langkah ini sangat direkomendasikan untuk mengisolasi "perkakas" proyek Anda dan mencegah konflik.
-    > **# Untuk Windows**
+3.  **Buat file `.env`** dan isi dengan format berikut:
+    ```env
+    TELEGRAM_TOKEN="TOKEN_TELEGRAM_ANDA"
+    ADMIN_USER_ID="USER_ID_TELEGRAM_ANDA"
+    GEMINI_API_KEY="KUNCI_API_GEMINI_ANDA"
+    YOUR_GOOGLE_EMAIL="emailanda@gmail.com"
+    ```
+4.  **Buat Virtual Environment & Install Dependensi**
     ```bash
+    # Untuk Windows
     python -m venv .venv
-    ```
-    >**source .\.venv\Scripts\activate**\
-    
-    > **# Untuk macOS/Linux**
-    ```bash
+    # Hasilnya Muncul File .\.venv\Scripts\activate
+
+    # Untuk macOS/Linux
     python3 -m venv .venv
+    # Hasilnya Muncul File .venv/bin/activate
     ```
-    >**source .venv/bin/activate**
-
-### Langkah 2: Membuat File yang Diperlukan
-
-Anda perlu membuat 3 file baru secara manual di dalam folder proyek Anda.
-
-1.  **Buat `requirements.txt`**
-    File ini berisi daftar semua "perkakas" Python yang dibutuhkan Razen.
+5.  **Buat file `requirements.txt`** dan isi dengan:
     ```text
     annotated-types==0.7.0
     anyio==4.9.0
@@ -123,16 +142,13 @@ Anda perlu membuat 3 file baru secara manual di dalam folder proyek Anda.
     uritemplate==4.2.0
     urllib3==2.5.0
     ```
-
-2.  **Buat `authenticate_google.py`**
-    File ini adalah skrip khusus yang hanya akan kita jalankan sekali untuk mendapatkan izin dari Google.
+7.  **Buat file `authenticate_google.py`**:
     ```python
     import os.path
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
     from google_auth_oauthlib.flow import InstalledAppFlow
 
-    # SCOPES ini harus sama persis dengan yang ada di razen_bot.py
     SCOPES = [
         "[https://www.googleapis.com/auth/drive](https://www.googleapis.com/auth/drive)",
         "[https://www.googleapis.com/auth/documents](https://www.googleapis.com/auth/documents)",
@@ -144,69 +160,124 @@ Anda perlu membuat 3 file baru secara manual di dalam folder proyek Anda.
         if os.path.exists("token.json"):
             print("File token.json sudah ada. Hapus file tersebut jika Anda ingin melakukan otentikasi ulang.")
             return
-
         flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
         creds = flow.run_local_server(port=0)
-
         with open("token.json", "w") as token:
             token.write(creds.to_json())
-        
         print("\nOtentikasi berhasil! File 'token.json' telah dibuat.")
-        print("Anda sekarang bisa menjalankan bot utama: python razen_bot.py")
 
     if __name__ == "__main__":
         main()
     ```
 
-3.  **Buat `.env`**
-    Ini adalah "brankas" tempat kita menyimpan semua kunci rahasia.
-    ```env
-    TELEGRAM_TOKEN="TOKEN_TELEGRAM_ANDA"
-    ADMIN_USER_ID="USER_ID_TELEGRAM_ANDA"
-    GEMINI_API_KEY="KUNCI_API_GEMINI_ANDA"
-    YOUR_GOOGLE_EMAIL="emailanda@gmail.com" //Opsional
-    ```
+#### A3. Jalankan Otentikasi untuk Menghasilkan `token.json`
 
-### Langkah 3: Mengisi Kunci Rahasia & Kredensial
+1.  Buka terminal di folder proyek Anda.
+2.  Buat dan aktifkan virtual environment, lalu jalankan `pip install -r requirements.txt`.
+3.  Jalankan skrip otentikasi: `python authenticate_google.py`.
+4.  Ikuti proses login di browser. Setelah selesai, file **`token.json`** akan muncul.
 
-Sekarang, mari kita isi "brankas" kita.
+#### A4. Buat file `.gitignore` (Sangat Penting!) File ini mencegah file-file rahasia Anda terunggah ke GitHub.
 
-1.  **`TELEGRAM_TOKEN`**: Dapatkan dari [**@BotFather**](https://t.me/BotFather) di Telegram dengan membuat bot baru.
-2.  **`ADMIN_USER_ID`**: Dapatkan User ID Telegram Anda dari [**@userinfobot**](https://t.me/userinfobot).
-3.  **`GEMINI_API_KEY`**: Dapatkan dari [**Google AI Studio**](https://aistudio.google.com/app/apikey).
-4.  **`YOUR_GOOGLE_EMAIL`**: Isi dengan alamat email Google Anda (Opsional untuk fitur Sheets).
-5.  **`credentials.json`**:
-    * Buat proyek di [**Google Cloud Console**](https://console.cloud.google.com/).
-    * Aktifkan API: **Google Drive API**, **Google Docs API**, dan **Google Sheets API**.
-    * Konfigurasi "OAuth consent screen" (pilih "External" dan tambahkan email Anda sebagai "Test user").
-    * Buat kredensial baru dengan tipe "OAuth client ID" dan pilih "Desktop app".
-    * Unduh file JSON yang dihasilkan, **ganti namanya menjadi `credentials.json`**, dan letakkan di folder utama proyek.
+    # Python virtual environment
+    .venv/
+    
+    # Environment variables
+    .env
+    
+    # Google API Credentials
+    credentials.json
+    token.json
+    
+    # Pycache
+    __pycache__/
+    *.pyc
 
-### Langkah 4: Instalasi & Otentikasi Final
+#### A5. Jalankan Bot di Komputer Lokal dengan command di terminal `python razen_bot.py`.
+>Sekarang setelah semua file (termasuk yang rahasia) ada di lokal, kita unggah versi amannya ke GitHub.
+1. **Buat Repositori Baru di GitHub:** Buka [GitHub](https://github.com/) dan buat repositori baru (misalnya, `RazenBot`). **Jangan** centang opsi untuk menambahkan `README` dan `.gitignore`.
+2. Pastikan ada sudah menginstal git di komputer anda dengan cek `git -v`
+```bash
+git init
+git add .
+git commit -m "Initial commit of Razen Bot project"
+git remote add origin [url repository]
+git push origin main
+```
 
-1.  **Instal Semua Pustaka (Library)**
-    Kembali ke terminal Anda (pastikan virtual environment aktif) dan jalankan:
+---
+### Bagian B: Pemasangan di Server/VPS (Terminal Only)
+
+#### B1. Persiapan Awal Server (Untuk Server Baru)
+
+Jika Anda menggunakan server Ubuntu/Debian yang masih baru, jalankan perintah ini terlebih dahulu:
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install python3 python3-pip python3-venv git -y
+```
+
+#### B2. Siapkan Proyek di Server
+
+1.  **Kloning Repositori dari GitHub Anda yang Sudah Dibuat Tadi**
+    > **Penting:** Sebelum push ke GitHub, pastikan Anda sudah membuat file `.gitignore` di proyek lokal Anda agar file rahasia (`.env`, `credentials.json`, `token.json`, `.venv/`) tidak ikut terunggah!
     ```bash
+    git clone https://github.com/NAMA_USER_ANDA/NAMA_REPO_ANDA.git
+    cd NAMA_REPO_ANDA
+    ```
+2.  **Buat Virtual Environment & Install Dependensi**
+    ```bash
+    python3 -m venv .venv
+    # Hasilnya Muncul File .venv/bin/activate
     pip install -r requirements.txt
     ```
 
-2.  **Jalankan Otentikasi Google**
-    Ini adalah langkah satu kali untuk menghasilkan `token.json`.
+#### B3. Pindahkan File Rahasia ke Server
+
+Anda sekarang perlu memindahkan 3 file rahasia (`.env`, `credentials.json`, dan `token.json`) dari komputer lokal Anda ke folder proyek di server, baik menggunakan `scp` ataupun copy-paste manual.
+* **Cara Manual Copy-Paste (Untuk Pemula)**
+    Buka setiap file rahasia di komputer Anda, salin seluruh isinya. Lalu, di terminal server masuk ke folder repo `cd NAMA_REPO_ANDA`, gunakan editor teks seperti `nano` untuk membuat file baru dan tempel isinya.
     ```bash
-    python authenticate_google.py
+    # Contoh untuk file .env
+    nano .env
+    # (Tempel konten, lalu tekan Ctrl+X, lalu Y, lalu Enter untuk menyimpan)
     ```
-    Sebuah tab browser akan terbuka. Ikuti proses login dan berikan semua izin yang diminta.
+#### B4. Jalankan Bot Secara Terus-Menerus
 
-### Langkah 5: Jalankan Bot!
+Pilih salah satu metode di bawah ini untuk menjalankan bot Anda agar tetap online.
 
-Setelah file `token.json` muncul, Anda siap untuk menjalankan Razen.
-```bash
-python razen_bot.py
-```
-Bot Anda sekarang sudah aktif! Buka Telegram dan mulailah berinteraksi dengannya.
+##### Metode 1: Sederhana (Menggunakan `screen`)
+> Pilihan terbaik untuk pemula dan pengujian cepat.
+
+1.  **Instal `screen` (jika belum ada):** `sudo apt install screen`
+2.  **Buat sesi baru:** `screen -S razen`
+3.  **Jalankan bot di dalam sesi:** `python razen_bot.py`
+4.  **Keluar dari sesi:** Tekan `Ctrl+A` lalu `D`. Bot akan tetap berjalan.
+5.  **Masuk kembali ke sesi:** `screen -r razen`.
+
+##### Metode 2: Profesional (Menggunakan `pm2`)
+> Pilihan terbaik untuk produksi karena memiliki fitur **restart otomatis** jika bot crash.
+
+1.  **Instal Node.js dan npm:**
+    ```bash
+    curl -fsSL [https://deb.nodesource.com/setup_lts.x](https://deb.nodesource.com/setup_lts.x) | sudo -E bash -
+    sudo apt-get install -y nodejs
+    ```
+2.  **Instal `pm2` secara global:**
+    ```bash
+    sudo npm install pm2 -g
+    ```
+3.  **Jalankan bot menggunakan `pm2`:**
+    ```bash
+    # Pastikan Anda berada di dalam folder proyek
+    pm2 start razen_bot.py --name "razen" --interpreter python3
+    ```
+4.  **Perintah `pm2` yang berguna:**
+    * `pm2 list`: Melihat status bot.
+    * `pm2 logs razen`: Melihat log bot secara real-time.
+    * `pm2 restart razen`: Memulai ulang bot.
+    * `pm2 stop razen`: Menghentikan bot.
 
 ---
-
 ## 🤖 Contoh Penggunaan
 
 Berikut adalah beberapa contoh cara berinteraksi dengan Razen.
