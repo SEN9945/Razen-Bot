@@ -99,23 +99,7 @@ Panduan ini terbagi menjadi dua bagian utama:
 3.  Jalankan skrip otentikasi: `python authenticate_google.py`.
 4.  Ikuti proses login di browser. Setelah selesai, file **`token.json`** akan muncul.
 
-#### A4. Buat file `.gitignore` (Sangat Penting!) File ini mencegah file-file rahasia Anda terunggah ke GitHub.
-
-    # Python virtual environment
-    .venv/
-    
-    # Environment variables
-    .env
-    
-    # Google API Credentials
-    credentials.json
-    token.json
-    
-    # Pycache
-    __pycache__/
-    *.pyc
-
-#### A5. Jalankan Bot di Komputer Lokal dengan command di terminal `python razen_bot.py`.
+#### A4. Jalankan Bot di Komputer Lokal dengan command di terminal `python razen_bot.py`.
 >Sekarang setelah semua file (termasuk yang rahasia) ada di lokal, kita unggah versi amannya ke GitHub.
 1. **Buat Repositori Baru di GitHub:** Buka [GitHub](https://github.com/) dan buat repositori baru (misalnya, `RazenBot`). **Jangan** centang opsi untuk menambahkan `README` dan `.gitignore`.
 2. Pastikan ada sudah menginstal git di komputer anda dengan cek `git -v`
