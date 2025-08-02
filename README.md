@@ -75,20 +75,13 @@ Panduan ini terbagi menjadi dua bagian utama:
 
 #### A2. Siapkan Folder Proyek Lokal
 
-1.  Buat folder proyek (misal: `MyRazenBot`) dan masukkan `razen_bot.py` serta `credentials.json` yang sudah di dapatkan di awal.
+1.  Buat folder proyek (misal: `MyRazenBot`) dan masukkan isi dari repository ini serta `credentials.json` yang sudah di dapatkan di awal.
 2.  **Kloning Repositori ini di dalam folder proyek**
     ```bash
     git clone https://github.com/SEN9945/Razen-Bot.git
     cd Razen-Bot
     ```
-3.  **Buat file `.env`** dan isi dengan format berikut:
-    ```env
-    TELEGRAM_TOKEN="TOKEN_TELEGRAM_ANDA"
-    ADMIN_USER_ID="USER_ID_TELEGRAM_ANDA"
-    GEMINI_API_KEY="KUNCI_API_GEMINI_ANDA"
-    YOUR_GOOGLE_EMAIL="emailanda@gmail.com"
-    ```
-4.  **Buat Virtual Environment & Install Dependensi**
+3.  **Buat Virtual Environment & Install Dependensi**
     ```bash
     # Untuk Windows
     python -m venv .venv
@@ -97,77 +90,6 @@ Panduan ini terbagi menjadi dua bagian utama:
     # Untuk macOS/Linux
     python3 -m venv .venv
     # Hasilnya Muncul File .venv/bin/activate
-    ```
-5.  **Buat file `requirements.txt`** dan isi dengan:
-    ```text
-    annotated-types==0.7.0
-    anyio==4.9.0
-    cachetools==5.5.2
-    certifi==2025.7.14
-    charset-normalizer==3.4.2
-    colorama==0.4.6
-    google-ai-generativelanguage==0.6.15
-    google-api-core==2.25.1
-    google-api-python-client==2.177.0
-    google-auth==2.40.3
-    google-auth-httplib2==0.2.0
-    google-auth-oauthlib==1.2.2
-    google-generativeai==0.8.5
-    googleapis-common-protos==1.70.0
-    grpcio==1.74.0
-    grpcio-status==1.71.2
-    gspread==6.2.1
-    h11==0.16.0
-    httpcore==1.0.9
-    httplib2==0.22.0
-    httpx==0.28.1
-    idna==3.10
-    oauthlib==3.3.1
-    proto-plus==1.26.1
-    protobuf==5.29.5
-    pyasn1==0.6.1
-    pyasn1_modules==0.4.2
-    pydantic==2.11.7
-    pydantic_core==2.33.2
-    pyparsing==3.2.3
-    python-dotenv==1.1.1
-    python-telegram-bot==22.3
-    requests==2.32.4
-    requests-oauthlib==2.0.0
-    rsa==4.9.1
-    sniffio==1.3.1
-    tqdm==4.67.1
-    typing-inspection==0.4.1
-    typing_extensions==4.14.1
-    uritemplate==4.2.0
-    urllib3==2.5.0
-    ```
-7.  **Buat file `authenticate_google.py`**:
-    ```python
-    import os.path
-    from google.auth.transport.requests import Request
-    from google.oauth2.credentials import Credentials
-    from google_auth_oauthlib.flow import InstalledAppFlow
-
-    SCOPES = [
-        "[https://www.googleapis.com/auth/drive](https://www.googleapis.com/auth/drive)",
-        "[https://www.googleapis.com/auth/documents](https://www.googleapis.com/auth/documents)",
-        "[https://www.googleapis.com/auth/spreadsheets](https://www.googleapis.com/auth/spreadsheets)"
-    ]
-
-    def main():
-        creds = None
-        if os.path.exists("token.json"):
-            print("File token.json sudah ada. Hapus file tersebut jika Anda ingin melakukan otentikasi ulang.")
-            return
-        flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
-        creds = flow.run_local_server(port=0)
-        with open("token.json", "w") as token:
-            token.write(creds.to_json())
-        print("\nOtentikasi berhasil! File 'token.json' telah dibuat.")
-
-    if __name__ == "__main__":
-        main()
     ```
 
 #### A3. Jalankan Otentikasi untuk Menghasilkan `token.json`
@@ -204,7 +126,7 @@ git commit -m "Initial commit of Razen Bot project"
 git remote add origin [url repository]
 git push origin main
 ```
-
+> Pasrikan Struktur projek sudah sesuai dengan contoh
 ---
 ### Bagian B: Pemasangan di Server/VPS (Terminal Only)
 
